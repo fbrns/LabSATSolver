@@ -1,20 +1,16 @@
 #!/bin/sh
 
-if [ "$JAVA_HOME" == "" ]
-then
-    echo "NO JAVA_HOME SET"; exit 1
-fi
+#
+# get and compile lingeling-ayv-86bf266-140429
+#
+cd lib
+mkdir lingeling
+cd lingeling
 
-#
-# Compile LabSAT solver
-#
-mvn package
-mv target/LabSAT-0.0.1-jar-with-dependencies.jar solver.jar
+wget http://fmv.jku.at/lingeling/lingeling-ayv-86bf266-140429.zip 
+unzip lingeling-ayv-86bf266-140429.zip
 
-#
-# Compile lingeling SAT-solver as shared library
-#
-cd lib/lingeling/code
+cd code
 chmod 755 configure.sh mkconfig.sh
 ./configure.sh -fPIC
 make lingeling
@@ -28,5 +24,3 @@ gcc -I $JAVA_HOME/lib/ -I $JAVA_HOME/include/ -I $JAVA_HOME/include/linux/ \
 -o libLingeling.so argumentation_sat_Lingeling.c -L./lingeling/code -llgl -fPIC -shared
 mv libLingeling.so ..
 cd ..
-
-chmod 755 solver
