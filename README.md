@@ -16,6 +16,8 @@ The above computational tasks are solved with respect to the following standard 
 * Grounded Semantics
 * Stable Semantics
 
+The [LabSAT-Solver Paper](LabSATSolverPaper.pdf) contains a detailed description of the technique used.
+
 # Installation
 
 At least java 7, maven, gcc and make are required. The environment variable $JAVA_HOME has to be set accordingly.
